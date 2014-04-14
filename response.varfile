@@ -1,0 +1,8 @@
+#install4j response file for Confluence 5.4.4
+#Tue Apr 08 15:22:32 CEST 2014
+executeLauncherAction$Boolean=true
+app.install.service$Boolean=true
+existingInstallationDir=/usr/local/Confluence
+sys.confirmedUpdateInstallationString=false
+sys.languageId=en
+sys.installationDir=/opt/atlassian/confluence
