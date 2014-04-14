@@ -1,4 +1,4 @@
-I describe the confluence/postgresql installation with docker. I decided to go for a standalone container (java + confluence + postgresql), with a mind to run the container like "start confluence" and with the local data directory as the only parameter.
+I describe the confluence/postgresql installation with docker. I decided to go for a standalone container (java + confluence + postgresql), with in mind to run the container like "start confluence" and with the local data directory as the only parameter.
 
 I start from the [Phusion ubuntu base image](https://github.com/phusion/baseimage-docker) and merge with the [Paintedfox postgresql](https://index.docker.io/u/paintedfox/postgresql/). You can find all the necessary files in the github repo: 
 
@@ -9,7 +9,8 @@ I start from the [Phusion ubuntu base image](https://github.com/phusion/baseimag
 See [Docker Installation](https://www.docker.io/gettingstarted/#h_installation)
 
 # the Dockerfile
-3 steps 
+3 steps: 
+
 1. install [Java](http://java.com/en/)
 2. install [Confluence](https://www.atlassian.com/software/confluence)
 3. install [Postgresql](http://www.postgresql.org/)
