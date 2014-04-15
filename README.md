@@ -92,6 +92,7 @@ RUN cp -f /scripts/start.sh /etc/my_init.d
 
 # SSH stuffs
 # add all the authorisation key from the machine where the build is done
+# you can copy your existing authorization with cp ~/.ssh/authorized_keys ./my_keys
 RUN mkdir -p /root/.ssh
 ADD my_keys /tmp/my_keys
 RUN cat /tmp/my_keys >> /root/.ssh/authorized_keys && rm -f /tmp/my_keys
@@ -99,7 +100,7 @@ RUN chmod 700 /root/.ssh
 RUN chmod 600 /root/.ssh/authorized_keys
 ```
 
-execute this Dockerfile:
+Build an image from this dockerfile:
 ```
 docker build -t confluence-img .
 ```
@@ -130,10 +131,16 @@ you should see something like
 CONTAINER ID        IMAGE                   COMMAND             CREATED             STATUS              PORTS                                            NAMES
 178b56498780        confluence-img:latest   /sbin/my_init       2 hours ago         Up 2 hours          0.0.0.0:5432->5432/tcp, 0.0.0.0:8090->8090/tcp   confluence-container
 ```
+The phusion base image install an ssh server in the container, so you can ssh into your container with the keys added to it. If you want to ssh from the host, do the following BEFORE building the image :
+```
+ssh-keygen -t rsa
+cat ˜/.ssh/id_rsa.pub >> ˜/.ssh/authorized_keys
+cp ˜/.ssh/authorized_keys my_keys
+```
 
 # configure Nginx
 Now, with your container started and its port exposed to the host, we are able to reverse proxy confluence with nginx.
-Add a www.mydomain.com file in /etc/nginx/sites-available with:
+Add a confluence.mydomain.com file in /etc/nginx/sites-available with:
 ```
 server {
     server_name confluence.mydomain.com;
@@ -141,6 +148,11 @@ server {
         proxy_pass http://localhost:8090;
     }
 }
+```
+then
+```
+cd /etc/nginx/sites-enabled
+sudo ln -s ../sites-available/confluence.mydomain.com
 ```
 
 # configure Confluence
