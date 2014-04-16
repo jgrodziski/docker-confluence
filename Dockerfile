@@ -26,6 +26,7 @@ RUN wget -O /tmp/confluence.bin http://www.atlassian.com/software/confluence/dow
 RUN chmod u+x /tmp/confluence.bin
 ADD response.varfile /tmp/response.varfile
 RUN /tmp/confluence.bin -q -varfile /tmp/response.varfile
+VOLUME ["/var/atlassian/application-data/confluence"]
 EXPOSE 8090
 
 # Ensure UTF-8
