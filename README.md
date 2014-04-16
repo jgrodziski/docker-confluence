@@ -53,6 +53,7 @@ RUN chmod u+x /tmp/confluence.bin
 ADD response.varfile /tmp/response.varfile
 # 4. run the installer 
 RUN /tmp/confluence.bin -q -varfile /tmp/response.varfile
+VOLUME ["/var/atlassian/application-data/confluence"]
 EXPOSE 8090
 
 # Ensure UTF-8
@@ -109,6 +110,7 @@ now that the image is built, we can run the container for the first time:
 ```
 docker run -d --name="confluence-container" \
            -p 8090:8090 -p 5432:5432 \
+           -v /var/local/data/confluence-data:/var/atlassian/application-data/confluence \
            -v /var/local/data/confluence-postgresql:/var/data/postgresql \
            -e USER="confluenceuser" \
            -e DB="confluencedb" \
