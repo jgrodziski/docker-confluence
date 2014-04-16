@@ -1,12 +1,10 @@
 # Confluence / Postgresql installation with [Docker](https://www.docker.io/)
 ## Intro
-I decided to go for a standalone container (java + confluence + postgresql), with in mind to run the container like "start confluence" and with the local data directory as the only parameter. I start from the [Phusion ubuntu base image](https://github.com/phusion/baseimage-docker) for its docker-friendliness and merge with the [Paintedfox postgresql](https://index.docker.io/u/paintedfox/postgresql/). You can find all the necessary files in the [github repo docker-confluence](https://github.com/jgrodziski/docker-confluence).
+I decided to go for a standalone container (java + confluence + postgresql), with in mind to run the container like "start confluence" and with the local data directory as the only parameter, I know some people might want to separate the webapp and the database but this is the way I go. I start from the [Phusion ubuntu base image](https://github.com/phusion/baseimage-docker) for its docker-friendliness and merge with the [Paintedfox postgresql](https://index.docker.io/u/paintedfox/postgresql/). You can find all the necessary files in the [github repo docker-confluence](https://github.com/jgrodziski/docker-confluence).
 
 # Prerequisites
-## Nginx
+## Nginx and Docker on the host 
 ```sudo apt-get install nginx```
-
-## Docker
 See [Docker Installation](https://www.docker.io/gettingstarted/#h_installation)
 
 # The Dockerfile
@@ -158,6 +156,6 @@ sudo ln -s ../sites-available/confluence.mydomain.com
 ```
 
 # configure Confluence
-The first time you'll visit the confluence installation URL, it will ask you to fill the licence data, setup the database, etc.:
+The first time you'll visit the confluence installation URL (http://confluence.mydomain.com), it will ask you to fill the licence data, setup the database, etc.
 
 
